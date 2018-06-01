@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^CompletionCallback)(NSArray *object);
+typedef void(^CompletionCallback)(NSArray *object, NSError *error);
 
 @interface HomeDataController : NSObject
 

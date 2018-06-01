@@ -16,13 +16,24 @@
 
 - (void)requestGoodsDataWithCallback:(CompletionCallback)callback
 {
-    [[NetWorkManager NetWorker] POST:app_home parameters:nil success:^(id responseData, NSURLSessionDataTask *task) {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:0];
+    [dic setObject:@"北京市" forKey:@"city"];
+    [[NetWorkManager NetWorker] POST:app_home parameters:dic success:^(id responseData, NSURLSessionDataTask *task) {
         NSDictionary *dic = (NSDictionary *) responseData;
         NSLog(@"%@",dic);
+        NSArray *jsonArray = [dic objectForKey:@"result"];
+        NSMutableArray *modelArray = [NSMutableArray arrayWithCapacity:0];
+        for (NSInteger i = 0; i < jsonArray.count; i++) {
+            NSDictionary *json = [jsonArray objectAtIndex:i];
+            JoinModel *model = [[JoinModel alloc] init];
+            [model parseJsonData:json];
+            [modelArray addObject:model];
+        }
         
+        callback(modelArray,nil);
         
     } failure:^(NSString *errorString, NSURLSessionDataTask *task) {
-        
+//        callback(nil,)
     }];
 }
 

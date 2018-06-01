@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface HomeTableViewCellViewModel : NSObject
+
+@property (nonatomic, strong) UIImage *picImage;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *desc;
 
 @end

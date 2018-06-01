@@ -76,8 +76,11 @@
 {
     _tableView.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
         HomeDataController *dataController = [[HomeDataController alloc] init];
-        [dataController requestGoodsDataWithCallback:^(NSArray *object) {
-//            _homeModelArray = object;
+        [dataController requestGoodsDataWithCallback:^(NSArray *object, NSError *error) {
+            if (error == nil) {
+                _homeModelArray = object;
+                //处理数据
+            }
         }];
     }];
 }
